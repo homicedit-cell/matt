@@ -1,9 +1,10 @@
 :root {
     --bg-color: #050505;
-    --card-bg: #121212;
+    --card-bg: #0a0a0a;
     --text-color: #ffffff;
     --gold: #d4af37;
     --gold-dim: #8a7024;
+    --gold-light: #f4d47c;
     --gray: #333;
     --font-primary: 'Inter', sans-serif;
     --font-heading: 'Oswald', sans-serif;
@@ -16,7 +17,7 @@
 }
 
 body {
-    background-color: var(--bg-color);
+    background: linear-gradient(135deg, #000000 0%, #0a0a0a 50%, #000000 100%);
     color: var(--text-color);
     font-family: var(--font-primary);
     min-height: 100vh;
@@ -24,6 +25,19 @@ body {
     flex-direction: column;
     align-items: center;
     overflow-x: hidden;
+    position: relative;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.08) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
 }
 
 .overlay {
@@ -32,40 +46,48 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle at center, rgba(212, 175, 55, 0.05) 0%, rgba(0,0,0,0) 70%);
+    background: radial-gradient(circle at center, rgba(212, 175, 55, 0.03) 0%, rgba(0, 0, 0, 0) 70%);
     pointer-events: none;
-    z-index: -1;
+    z-index: 0;
 }
 
 header {
     text-align: center;
     padding: 3rem 1rem;
     animation: fadeInDown 1s ease-out;
+    position: relative;
+    z-index: 1;
 }
 
 header h1 {
     font-family: var(--font-heading);
-    font-size: 4rem;
-    letter-spacing: 5px;
+    font-size: 4.5rem;
+    letter-spacing: 8px;
     color: var(--text-color);
     text-transform: uppercase;
     margin-bottom: 0.5rem;
-    text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+    text-shadow: 0 0 30px rgba(212, 175, 55, 0.4);
+    background: linear-gradient(135deg, #ffffff 0%, var(--gold-light) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 header .subtitle {
     color: var(--gold);
-    letter-spacing: 2px;
-    font-size: 1rem;
+    letter-spacing: 3px;
+    font-size: 1.1rem;
     font-weight: 700;
+    text-transform: uppercase;
 }
 
 #main-container {
     width: 100%;
-    max-width: 1000px;
+    max-width: 1200px;
     padding: 2rem;
     min-height: 60vh;
     position: relative;
+    z-index: 1;
 }
 
 /* Sections */
@@ -82,102 +104,158 @@ section {
 .section-title {
     font-family: var(--font-heading);
     text-align: center;
-    font-size: 2.5rem;
+    font-size: 2.8rem;
     margin-bottom: 3rem;
-    letter-spacing: 2px;
-    border-bottom: 2px solid var(--gold);
+    letter-spacing: 3px;
+    border-bottom: 3px solid var(--gold);
     display: inline-block;
-    padding-bottom: 0.5rem;
+    padding-bottom: 0.8rem;
     position: relative;
     left: 50%;
     transform: translateX(-50%);
+    text-transform: uppercase;
 }
 
 /* Packages */
 .packages {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    display: flex;
+    justify-content: center;
+    align-items: center;
     gap: 3rem;
+    max-width: 600px;
+    margin: 0 auto;
 }
 
 .package-card {
-    background: var(--card-bg);
-    border: 1px solid var(--gray);
-    padding: 3rem;
+    background: linear-gradient(135deg, var(--card-bg) 0%, #0f0f0f 100%);
+    border: 2px solid var(--gray);
+    padding: 3.5rem 3rem;
     text-align: center;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     position: relative;
     overflow: hidden;
+    width: 100%;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+.package-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.package-card:hover::before {
+    opacity: 1;
 }
 
 .package-card:hover {
-    transform: translateY(-10px);
+    transform: translateY(-15px) scale(1.02);
     border-color: var(--gold);
-    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.1);
+    box-shadow: 0 20px 60px rgba(212, 175, 55, 0.3);
+}
+
+.premium-card {
+    border-color: var(--gold-dim);
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1410 100%);
+}
+
+.package-badge {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+    color: #000;
+    padding: 0.4rem 1rem;
+    font-size: 0.7rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+    border-radius: 2px;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
 }
 
 .package-card h3 {
     font-family: var(--font-heading);
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: 3px;
+    color: var(--gold-light);
+}
+
+.package-subtitle {
+    font-size: 1.1rem;
+    color: #aaa;
+    margin-bottom: 1.5rem;
+    font-weight: 400;
+    letter-spacing: 1px;
 }
 
 .package-card .price {
-    font-size: 1.5rem;
+    font-size: 2.5rem;
     color: var(--gold);
-    font-weight: 700;
-    margin-bottom: 2rem;
+    font-weight: 900;
+    margin-bottom: 2.5rem;
+    text-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
 }
 
 .package-card ul {
     list-style: none;
     text-align: left;
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
 }
 
 .package-card li {
-    padding: 0.5rem 0;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding: 0.8rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+    color: #ccc;
+    transition: color 0.3s ease;
+}
+
+.package-card:hover li {
+    color: #fff;
 }
 
 .btn-select {
-    background: transparent;
-    border: 2px solid var(--text-color);
-    color: var(--text-color);
-    padding: 1rem 2rem;
-    font-weight: 700;
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+    border: none;
+    color: #000;
+    padding: 1.2rem 2.5rem;
+    font-weight: 900;
     cursor: pointer;
     transition: all 0.3s ease;
     width: 100%;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
+    font-size: 1rem;
+    box-shadow: 0 5px 20px rgba(212, 175, 55, 0.3);
 }
 
-.package-card:hover .btn-select {
-    background: var(--gold);
-    border-color: var(--gold);
-    color: #000;
-}
-
-/* Gold Card Special Styling */
-.gold-card {
-    border-color: var(--gold-dim);
+.btn-select:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(212, 175, 55, 0.5);
 }
 
 /* Form Styles */
 #booking-form-section {
-    max-width: 600px;
+    max-width: 650px;
     margin: 0 auto;
-    background: var(--card-bg);
-    padding: 3rem;
-    border: 1px solid var(--gold-dim);
-    box-shadow: 0 0 50px rgba(0,0,0,0.5);
+    background: linear-gradient(135deg, var(--card-bg) 0%, #0f0f0f 100%);
+    padding: 3.5rem;
+    border: 2px solid var(--gold-dim);
+    box-shadow: 0 0 60px rgba(212, 175, 55, 0.2);
     animation: slideUp 0.5s ease-out;
 }
 
 .input-group {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.8rem;
     text-align: left;
 }
 
@@ -192,19 +270,21 @@ section {
 
 label {
     display: block;
-    font-size: 0.8rem;
-    color: #888;
-    margin-bottom: 0.5rem;
-    letter-spacing: 1px;
+    font-size: 0.75rem;
+    color: var(--gold);
+    margin-bottom: 0.6rem;
+    letter-spacing: 1.5px;
     font-weight: 700;
+    text-transform: uppercase;
 }
 
-input, select {
+input,
+select {
     width: 100%;
     background: transparent;
     border: none;
     border-bottom: 2px solid var(--gray);
-    padding: 0.8rem 0;
+    padding: 0.9rem 0;
     color: white;
     font-family: var(--font-primary);
     font-size: 1.1rem;
@@ -212,41 +292,47 @@ input, select {
     transition: all 0.3s;
 }
 
-input:focus, select:focus {
+input:focus,
+select:focus {
     border-color: var(--gold);
+    box-shadow: 0 2px 10px rgba(212, 175, 55, 0.2);
 }
 
 select {
-    background: var(--card-bg); /* ensure options are visible */
+    background: var(--card-bg);
+    cursor: pointer;
 }
 
 .divider {
     font-family: var(--font-heading);
-    font-size: 1.2rem;
-    margin: 2rem 0;
-    border-bottom: 1px solid #333;
-    padding-bottom: 0.5rem;
+    font-size: 1.3rem;
+    margin: 2.5rem 0 2rem 0;
+    border-bottom: 2px solid var(--gold-dim);
+    padding-bottom: 0.8rem;
     color: var(--gold);
+    letter-spacing: 2px;
+    text-transform: uppercase;
 }
 
 .btn-submit {
     width: 100%;
-    background: var(--gold);
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
     color: black;
     border: none;
-    padding: 1.2rem;
+    padding: 1.4rem;
     font-size: 1.2rem;
     font-weight: 900;
     text-transform: uppercase;
     cursor: pointer;
-    margin-top: 1rem;
+    margin-top: 1.5rem;
     letter-spacing: 2px;
-    transition: transform 0.2s;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 25px rgba(212, 175, 55, 0.4);
 }
 
 .btn-submit:hover {
-    transform: scale(1.02);
-    box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 35px rgba(212, 175, 55, 0.6);
 }
 
 .back-btn {
@@ -254,27 +340,31 @@ select {
     border: none;
     color: #666;
     cursor: pointer;
-    margin-bottom: 1rem;
-    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
     transition: color 0.3s;
+    letter-spacing: 1px;
 }
 
 .back-btn:hover {
-    color: white;
+    color: var(--gold);
 }
 
 .disclaimer {
-    margin-top: 1rem;
+    margin-top: 1.5rem;
     font-size: 0.7rem;
-    color: #444;
+    color: #555;
     text-align: center;
+    line-height: 1.5;
 }
 
 #selected-package-display {
     text-align: center;
     color: var(--gold);
     font-weight: 700;
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
 }
 
 /* Success Screen */
@@ -289,32 +379,107 @@ select {
     font-size: 5rem;
     color: var(--gold);
     margin-bottom: 1rem;
+    letter-spacing: 5px;
+    text-shadow: 0 0 40px rgba(212, 175, 55, 0.6);
+}
+
+#success-screen p {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+#success-screen .details {
+    color: #888;
+    font-size: 1rem;
 }
 
 .checkmark {
-    font-size: 5rem;
+    font-size: 6rem;
     color: var(--gold);
-    margin-top: 2rem;
-    animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    margin-top: 3rem;
+    animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    text-shadow: 0 0 30px rgba(212, 175, 55, 0.8);
 }
 
 /* Animations */
 @keyframes fadeInDown {
-    from { opacity: 0; transform: translateY(-50px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 @keyframes slideUp {
-    from { opacity: 0; transform: translateY(50px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
 @keyframes popIn {
-    from { opacity: 0; transform: scale(0.5); }
-    to { opacity: 1; transform: scale(1); }
+    from {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 @media (max-width: 768px) {
-    header h1 { font-size: 2.5rem; }
-    .form-row { flex-direction: column; gap: 0; }
+    header h1 {
+        font-size: 2.8rem;
+        letter-spacing: 4px;
+    }
+
+    header .subtitle {
+        font-size: 0.9rem;
+    }
+
+    .form-row {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+
+    .package-card {
+        padding: 2.5rem 2rem;
+    }
+
+    .package-card h3 {
+        font-size: 2.2rem;
+    }
+
+    #booking-form-section {
+        padding: 2.5rem 2rem;
+    }
+
+    #success-screen h1 {
+        font-size: 3.5rem;
+    }
 }

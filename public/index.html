@@ -1,51 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MATT RIFE | THE EXPERIENCE</title>
+    <title>MATT RIFE | EXCLUSIVE MEET & GREET</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Oswald:wght@500;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
     <div class="overlay"></div>
 
     <header>
         <h1>MATT RIFE</h1>
-        <p class="subtitle">THE EXCLUSIVE MEET & GREET EVENT</p>
+        <p class="subtitle">EXCLUSIVE MEET & GREET EXPERIENCE</p>
     </header>
 
     <main id="main-container">
         <!-- Package Selection -->
         <section id="package-selection" class="fade-in">
-            <h2 class="section-title">CHOOSE YOUR FATE</h2>
+            <h2 class="section-title">THE ULTIMATE EXPERIENCE</h2>
             <div class="packages">
-                <div class="package-card" onclick="selectPackage('24 HOURS')">
+                <div class="package-card premium-card"
+                    onclick="selectPackage('Meet and Greet - Spend 24 Hours with Matt Rife')">
                     <div class="card-content">
-                        <h3>24 HOURS</h3>
-                        <p class="price">$5,000</p>
+                        <div class="package-badge">EXCLUSIVE</div>
+                        <h3>MEET & GREET</h3>
+                        <p class="package-subtitle">Spend 24 Hours with Matt Rife</p>
+                        <p class="price">$200</p>
                         <ul class="features">
-                            <li>Private Dinner</li>
-                            <li>Backstage Access</li>
-                            <li>Personal Photo Op</li>
+                            <li>✓ Private Meet & Greet Session</li>
+                            <li>✓ Exclusive 24-Hour Access</li>
+                            <li>✓ Behind-the-Scenes Experience</li>
+                            <li>✓ Professional Photo Opportunity</li>
+                            <li>✓ VIP Backstage Pass</li>
+                            <li>✓ Personal Q&A Session</li>
+                            <li>✓ Signed Merchandise</li>
+                            <li>✓ Lifetime Memories</li>
                         </ul>
-                        <button class="btn-select">SELECT</button>
-                    </div>
-                </div>
-                <div class="package-card gold-card" onclick="selectPackage('48 HOURS')">
-                    <div class="card-content">
-                        <h3>48 HOURS</h3>
-                        <p class="price">$10,000</p>
-                        <ul class="features">
-                            <li>Everything in 24h</li>
-                            <li>Travel with Tour Bus</li>
-                            <li>Private Party Access</li>
-                            <li>Comedy Workshop</li>
-                        </ul>
-                        <button class="btn-select">SELECT</button>
+                        <button class="btn-select">BOOK NOW</button>
                     </div>
                 </div>
             </div>
@@ -59,7 +57,7 @@
 
             <form id="booking-form">
                 <input type="hidden" id="package-input" name="package">
-                
+
                 <div class="form-row">
                     <div class="input-group">
                         <label>FULL NAME</label>
@@ -107,8 +105,9 @@
                     </div>
                 </div>
 
-                <button type="submit" class="btn-submit">CONFIRM BOOKING</button>
-                <p class="disclaimer">By clicking confirm, you agree to the terms of service. This is a non-refundable deposit.</p>
+                <button type="submit" class="btn-submit">CONFIRM BOOKING - $200</button>
+                <p class="disclaimer">By clicking confirm, you agree to the terms of service. This is a non-refundable
+                    deposit.</p>
             </form>
         </section>
 
@@ -116,8 +115,8 @@
         <section id="success-screen" class="hidden">
             <div class="success-content">
                 <h1>YOU'RE IN.</h1>
-                <p>PREPARE YOURSELF.</p>
-                <p class="details">We have received your request. A verification email has been sent.</p>
+                <p>PREPARE FOR THE EXPERIENCE OF A LIFETIME.</p>
+                <p class="details">We have received your booking. A confirmation email has been sent to your inbox.</p>
                 <div class="checkmark">✓</div>
             </div>
         </section>
@@ -125,4 +124,5 @@
 
     <script src="script.js"></script>
 </body>
+
 </html>
