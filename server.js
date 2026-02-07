@@ -18,6 +18,17 @@ app.use(express.static('public'));
 // MongoDB Connection
 const MONGODB_URI = process.env.MONGODB_URI;
 
+if (!MONGODB_URI) {
+    console.error('❌ MONGODB_URI environment variable is missing!');
+    console.log('⚠️  Server will start but utilize file-based storage only.');
+} else {
+    console.log('Attempting to connect to MongoDB...');
+    // Log masked URI for debugging (hide password)
+    const maskedURI = MONGODB_URI.replace(/:([^:@]+)@/, ':****@');
+    console.log('Connection string:', maskedURI);
+}
+
+
 mongoose.connect(MONGODB_URI)
     .then(() => {
         console.log('✅ Connected to MongoDB successfully!');
